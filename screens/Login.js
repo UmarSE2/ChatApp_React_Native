@@ -9,13 +9,9 @@ const Login = ({ navigation }) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(false)
 
     const onHandleLogin = () => {
-        if (email == "" && password == "") {
-            setError(true);
-        }
-        else if (email !== "" && password !== "") {
+        if (email !== "" && password !== "") {
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => console.log("Login success"))
                 .catch((err) => Alert.alert("Login error", err.message));
@@ -29,7 +25,7 @@ const Login = ({ navigation }) => {
             <SafeAreaView style={styles.form}>
                 <Text style={styles.title}>Log In</Text>
                 <TextInput
-                    style={[styles.input, error && { borderColor: "red", borderWidth: 1 }]}
+                    style={styles.input}
                     placeholder="Enter email"
                     keyboardType="email-address"
                     autoCapitalize="none"
@@ -38,7 +34,7 @@ const Login = ({ navigation }) => {
                     onChangeText={(text) => setEmail(text)}
                 />
                 <TextInput
-                    style={[styles.input, error && { borderColor: "red", borderWidth: 1 }]}
+                    style={styles.input}
                     placeholder="Enter password"
                     autoCapitalize="none"
                     autoCorrect={false}
